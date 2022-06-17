@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { Header } from "../components/header";
-import { auth } from "../firebase/clientApp";
+import { useState } from 'react';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { Header } from '../components/header';
+import { auth } from '../firebase/clientApp';
 
 export default function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const validatePassword = () => {
-    if (password !== "" && password === confirmPassword) return true;
+    if (password !== '' && password === confirmPassword) return true;
     setErrorMessage("Password don't match");
     return false;
   };
@@ -23,9 +23,9 @@ export default function Register() {
           console.log(res.user);
         })
         .catch((err) => setErrorMessage(err.message));
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
     }
   };
 
