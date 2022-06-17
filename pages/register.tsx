@@ -19,9 +19,7 @@ export default function Register() {
     e.preventDefault();
     if (validatePassword()) {
       createUserWithEmailAndPassword(auth, email, password)
-        .then((res) => {
-          console.log(res.user);
-        })
+        .then((res) => {})
         .catch((err) => setErrorMessage(err.message));
       setEmail('');
       setPassword('');
