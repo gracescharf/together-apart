@@ -1,7 +1,9 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useRouter } from 'next/router';
 import { auth, googleAuthProvider } from '../firebase/clientApp';
 
 export const ButtonSignInGoogle = () => {
+  const router = useRouter();
   const signInWithGoogle = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     signInWithPopup(auth, googleAuthProvider)
@@ -12,6 +14,7 @@ export const ButtonSignInGoogle = () => {
         // The signed-in user info.
         const user = result.user;
         // ...
+        router.push('/overview');
       })
       .catch((error) => {
         // Handle Errors here.

@@ -21,7 +21,9 @@ export default function CreateAccount() {
     e.preventDefault();
     if (validatePassword()) {
       createUserWithEmailAndPassword(auth, email, password)
-        .then((res) => {})
+        .then((res) => {
+          router.push('/overview');
+        })
         .catch((err) => setErrorMessage(err.message));
       setEmail('');
       setPassword('');

@@ -3,37 +3,33 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import {
   onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   signOut,
-  signInWithPopup,
   GoogleAuthProvider,
-  UserCredential,
+  User,
 } from 'firebase/auth';
 import { auth } from '../firebase/clientApp';
 
 const AuthContext = createContext<any>({});
-const googleAuthProvider = new GoogleAuthProvider();
+interface IUseAuth {
+  user: User;
+  logout: () => void;
+}
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = (): IUseAuth => useContext(AuthContext);
 
 export const AuthContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<Partial<User> | null>(null);
   const [loading, setLoading] = useState(true);
   console.log(user);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUser({
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-        });
+        setUser(user);
       } else {
         setUser(null);
       }

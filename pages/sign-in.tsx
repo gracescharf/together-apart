@@ -2,6 +2,7 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { ButtonSignInGoogle } from '../components/button-sign-in-google';
 import { auth } from '../firebase/clientApp';
@@ -10,6 +11,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
 
   const signIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ export default function Login() {
     e.preventDefault();
     sendPasswordResetEmail(auth, email)
       .then(() => {
+        router.push('/overview');
         // Password reset email sent!
         // ..
       })
