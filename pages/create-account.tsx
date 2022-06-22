@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { Header } from '../components/header';
-import { auth } from '../firebase/clientApp';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, googleAuthProvider } from '../firebase/clientApp';
+import { useRouter } from 'next/router';
+import { ButtonSignInGoogle } from '../components/button-sign-in-google';
 
-export default function Register() {
+export default function CreateAccount() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
 
   const validatePassword = () => {
     if (password !== '' && password === confirmPassword) return true;
@@ -15,7 +17,7 @@ export default function Register() {
     return false;
   };
 
-  const register = (e: React.FormEvent<HTMLFormElement>) => {
+  const createAccount = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validatePassword()) {
       createUserWithEmailAndPassword(auth, email, password)
@@ -29,9 +31,8 @@ export default function Register() {
 
   return (
     <div>
-      <Header />
-      <h1>Register</h1>
-      <form onSubmit={register}>
+      <h2>Create Account</h2>
+      <form onSubmit={createAccount}>
         <div>
           <label htmlFor="email">Email</label>
           <input
@@ -66,8 +67,8 @@ export default function Register() {
           />
         </div>
         <p>{errorMessage}</p>
-        <button>Register</button>
-        <button type="button">Register with Google</button>
+        <button>Create an account</button>
+        <ButtonSignInGoogle />
       </form>
     </div>
   );

@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -11,5 +11,6 @@ const clientCredentials = {
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
 
+export const googleAuthProvider = new GoogleAuthProvider();
 export const firebaseApp = initializeApp(clientCredentials);
 export const auth = getAuth();
