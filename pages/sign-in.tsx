@@ -1,41 +1,41 @@
 import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
-} from 'firebase/auth';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { ButtonSignInGoogle } from '../components/button-sign-in-google';
-import { auth } from '../firebase/clientApp';
+} from 'firebase/auth'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { ButtonSignInGoogle } from '../components/button-sign-in-google'
+import { auth } from '../firebase/clientApp'
 
-export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const router = useRouter();
+export default function SignIn() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
+  const router = useRouter()
 
   const signIn = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {})
-      .catch((err) => setErrorMessage(err.message));
-    setEmail('');
-    setPassword('');
-  };
+      .catch((err) => setErrorMessage(err.message))
+    setEmail('')
+    setPassword('')
+  }
 
   const triggerPasswordResetEmail = (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        router.push('/overview');
+        router.push('/overview')
         // Password reset email sent!
         // ..
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        const errorCode = error.code
+        const errorMessage = error.message
         // ..
-      });
-  };
+      })
+  }
   return (
     <div>
       <h2>Login</h2>
@@ -68,5 +68,5 @@ export default function Login() {
         <ButtonSignInGoogle />
       </form>
     </div>
-  );
+  )
 }

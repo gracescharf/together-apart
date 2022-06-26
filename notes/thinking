@@ -1,0 +1,36 @@
+how do i want the data to be structured
+
+{
+user
+}
+
+- users with user information
+- users with friend list
+- each user has contacts and with each contact they have zero or more stories
+
+1. send have multiple "stories" (chats) with
+2. contacts have first & last name, profile photo
+3. text messages only
+4. mt
+
+Note: a story is like a chat, but it is either in progress or complete
+
+- users with user data (this is kind of already handled by firebase auth to be honest)
+- users can add contacts
+- with each contact, user can have multiple "stories", in progress and/or complete
+- groups can have names
+- being added to a group, user can see previous stories
+- removed from a group, user can't see any stories (maybe just the ones they've contributed to? not sure about this)
+
+requests:
+
+- post story
+- post message
+- get story
+- put message
+- put title
+- put progress
+
+How to create an endpoint
+
+put firebase db stuff in components first and then probably move it to api

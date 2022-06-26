@@ -1,0 +1,48 @@
+{
+  "stories": {
+    "storyId1": {
+      "title": "",
+      "inProgress": true,
+      "lastMessage": "this is the beginning",
+      "users": {
+        "userId1": true,
+        "userId2": true
+      }
+    }
+  },
+  "messages": {
+    "storyId1": {
+      "mId1": {
+        "content": "this is the beginning",
+        "timestamp": "timestamp",
+        "sentBy": "userId1"
+      }
+    }
+  },
+  "users": {
+    "userId1": {
+      "displayName": "Grace Scharf",
+      "avatar": "img-url",
+      "email": "grace.scharf@gmail.com"
+    }
+  },
+  "contacts": {
+    "userId1": {
+      "userId2": {
+        "name": "Some name",
+        "avatar": "img-url",
+        "stories": ["storyId1", "storyId2"]
+      },
+      "userId3": {
+        "name": "Someother name",
+        "avatar": "img-url",
+        "stories": ["storyId4", "storyId5"]
+      },
+      "userId4": {
+        "name": "Somethird name",
+        "avatar": "img-url",
+        "stories": []
+      }
+    }
+  }
+}

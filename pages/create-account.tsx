@@ -1,41 +1,50 @@
-import { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, googleAuthProvider } from '../firebase/clientApp';
-import { useRouter } from 'next/router';
-import { ButtonSignInGoogle } from '../components/button-sign-in-google';
+import { useState } from 'react'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../firebase/clientApp'
+import { useRouter } from 'next/router'
+import { ButtonSignInGoogle } from '../components/button-sign-in-google'
 
 export default function CreateAccount() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const router = useRouter();
+  const [displayName, setDisplayName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
+  const router = useRouter()
 
   const validatePassword = () => {
-    if (password !== '' && password === confirmPassword) return true;
-    setErrorMessage("Password don't match");
-    return false;
-  };
+    if (password !== '' && password === confirmPassword) return true
+    setErrorMessage("Password don't match")
+    return false
+  }
 
   const createAccount = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     if (validatePassword()) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((res) => {
-          router.push('/overview');
+          router.push('/overview')
         })
-        .catch((err) => setErrorMessage(err.message));
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
+        .catch((err) => setErrorMessage(err.message))
+      setEmail('')
+      setPassword('')
+      setConfirmPassword('')
     }
-  };
+  }
 
   return (
     <div>
       <h2>Create Account</h2>
       <form onSubmit={createAccount}>
         <div>
+          <label htmlFor="displayName">Name</label>
+          <input
+            id="displayName"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            type="text"
+            required
+          />
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -73,5 +82,5 @@ export default function CreateAccount() {
         <ButtonSignInGoogle />
       </form>
     </div>
-  );
+  )
 }
