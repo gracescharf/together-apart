@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { auth } from '../firebase/clientApp'
 import { useRouter } from 'next/router'
 import { ButtonSignInGoogle } from '../components/button-sign-in-google'
@@ -22,6 +22,10 @@ export default function CreateAccount() {
     e.preventDefault()
     if (validatePassword()) {
       createUserWithEmailAndPassword(auth, email, password)
+        .then((res) => {
+          console.log('res', res)
+          updateProfile(res.user, { displayName })
+        })
         .then((res) => {
           router.push('/overview')
         })
